@@ -1,0 +1,142 @@
+-- Clase 10
+-- Diego Puértolas Ruiz, 1SW
+
+-- No son iguales:
+SELECT EM.FIRST_NAME, EM.LAST_NAME, DE.DEPARTMENT_NAME
+FROM HR.DEPARTMENTS DE INNER JOIN HR.EMPLOYEES EM
+ON DE.MANAGER_ID= EM.EMPLOYEE_ID;
+
+SELECT EM.FIRST_NAME, EM.LAST_NAME, DE.DEPARTMENT_NAME
+FROM  HR.DEPARTMENTS DE  INNER JOIN HR.EMPLOYEES EM
+ON DE.MANAGER_ID=EM.MANAGER_ID;
+
+SELECT EM.FIRST_NAME, EM.LAST_NAME, DE.DEPARTMENT_NAME
+FROM  HR.DEPARTMENTS DE  INNER JOIN HR.EMPLOYEES EM
+ON DE.DEPARTMENT_ID=EM.DEPARTMENT_ID;
+
+-- 12-MOSTRAR EL NOMBRE DE LOS DEPARTAMENTOS QUE TIENEN EMPLEADOS ASÍ COMO EL SALARIO DE ESTOS.
+SELECT 
+  D.department_name, 
+  EMP.first_name,
+  EMP.last_name,
+  EMP.salary
+FROM
+  DEPARTMENTS D 
+  INNER JOIN EMPLOYEES EMP
+  ON D.department_id = EMP.department_id;
+
+-- 13-MOSTRAR EL NOMBRE DEL DEPARTAMENTO Y EL SALARIO TOTAL DE LOS EMPLEADOS QUE PERTENECEN A DICHO DEPARTAMENTO.
+SELECT 
+  D.department_name,
+  SUM(EMP.salary) AS total_salary
+FROM
+  DEPARTMENTS D
+  INNER JOIN EMPLOYEES EMP
+  ON D.department_id = EMP.department_id
+GROUP BY
+  D.department_name;
+
+-- 14-MOSTRAR EL NOMBRE DE TODOS LOS DEPARTAMENTOS Y EL SALARIO TOTAL DE LOS EMPLEADOS QUE PERTENECEN A DICHOS DEPARTAMENTOS.
+SELECT 
+  D.department_name,
+  SUM(EMP.salary) AS total_salary
+FROM
+  DEPARTMENTS D
+  LEFT JOIN EMPLOYEES EMP
+  ON D.department_id = EMP.department_id
+GROUP BY
+  D.department_name; 
+
+-- 15-MOSTRAR NOMBRE DE LOS EMPLEADOS, APELLIDOS DE LOS  EMPLEADOS Y NOMBRE DEL DEPARTAMENTO SITUADO EN ESTADOS UNIDOS Y QUE PERTENEZCAN A CUALQUIER DEPARTAMENTO IT.
+SELECT
+  EMP.first_name,
+  EMP.last_name,
+  D.department_name
+FROM 
+  EMPLOYEES EMP
+  INNER JOIN DEPARTMENTS D
+  ON EMP.department_id = D.department_id
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+  INNER JOIN COUNTRIES C
+  ON L.country_id = C.country_id
+WHERE C.country_name = 'United States of America' AND UPPER(D.department_name) LIKE '%IT%';
+
+-- 16-MUESTRA EL GASTO EN SALARIOS POR CIUDADES
+SELECT 
+  L.city,
+  SUM(EMP.salary) AS total_salary
+FROM 
+  EMPLOYEES EMP
+  INNER JOIN DEPARTMENTS D
+  ON EMP.department_id = D.department_id
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+GROUP BY
+  L.city;
+
+-- 17-MUESTRA EL NÚMERO DE DEPARTAMENTOS DE CADA CIUDAD
+SELECT 
+  L.city,
+  COUNT(D.department_id) AS number_of_departments
+FROM 
+  DEPARTMENTS D
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+GROUP BY
+  L.city;
+
+-- 18-MUESTRA EL NOMBRE Y APELLIDOS DE LOS MANAGERS DE DEPARTAMENTO, ASÍ COMO EL DEPARTAMENTO AL QUE PERTENECEN. 
+SELECT 
+  EMP.first_name,
+  EMP.last_name,
+  D.department_name
+FROM 
+  DEPARTMENTS D
+  INNER JOIN EMPLOYEES EMP
+  ON D.manager_id = EMP.employee_id;
+
+-- 19-MUESTRA LA CANTIDAD DE DEPARTAMENTOS POR PAÍS.
+SELECT 
+  C.country_name,
+  COUNT(D.department_id) AS number_of_departments
+FROM
+  DEPARTMENTS D
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+  INNER JOIN COUNTRIES C
+  ON L.country_id = C.country_id
+GROUP BY
+  C.country_name;
+
+-- 20-MUESTRA LA CANTIDAD DE EMPLEADOS POR PAÍS Y REGION.
+SELECT
+  R.region_name,
+  C.country_name,
+  COUNT(EMP.employee_id) AS number_of_employees
+FROM
+  EMPLOYEES EMP
+  INNER JOIN DEPARTMENTS D
+  ON EMP.department_id = D.department_id
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+  INNER JOIN COUNTRIES C
+  ON L.country_id = C.country_id
+  INNER JOIN REGIONS R
+  ON C.region_id = R.region_id
+GROUP BY
+  R.region_name,
+  C.country_name;
+
+-- 21-MUESTRA LA CANTIDAD DE EMPLEADOS POR CIUDAD
+SELECT 
+  L.city,
+  COUNT(EMP.employee_id) AS number_of_employees
+FROM 
+  EMPLOYEES EMP
+  INNER JOIN DEPARTMENTS D
+  ON EMP.department_id = D.department_id
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+GROUP BY
+  L.city;
