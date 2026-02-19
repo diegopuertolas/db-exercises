@@ -4,8 +4,8 @@ Colección de ejercicios de Oracle SQL de la asignatura de BBDD de 1ºDAW.
 
 ## **Indice**
 
-- [Ejercicios Modelos E/R, Relacional y DDL](./Modelos%20BBDD/)
-- [Consultas DML](./DML/)
+- [**Ejercicios Modelos E/R, Relacional y DDL**](./Modelos%20BBDD/)
+- [**Consultas DML**](./DML/)
   - **Ejercicios de Apoyo**
     - [Consultas con Join](./DML/EjerciciosApoyo/consultas-join.sql)
     - [Consultas con Join y Condiciones](./DML/EjerciciosApoyo/consultas-join-condiciones.sql)
