@@ -5,10 +5,13 @@ Colección de ejercicios de Oracle SQL de la asignatura de BBDD de 1ºDAW.
 ## **Indice**
 
 - [**Ejercicios Modelos E/R, Relacional y DDL**](./Modelos%20BBDD/)
+
 - [**Consultas DML**](./DML/)
+
   - **Ejercicios de Apoyo**
     - [Consultas con Join](./DML/EjerciciosApoyo/consultas-join.sql)
     - [Consultas con Join y Condiciones](./DML/EjerciciosApoyo/consultas-join-condiciones.sql)
+
   - **Ejercicios de Clase**
     - [Clase 1](./DML/EjerciciosClase/Clase1.sql)
     - [Clase 2](./DML/EjerciciosClase/Clase2.sql)
@@ -25,5 +28,7 @@ Colección de ejercicios de Oracle SQL de la asignatura de BBDD de 1ºDAW.
     - [Clase 12](./DML/EjerciciosClase/Clase12.sql)
     - [Clase 13](./DML/EjerciciosClase/Clase13.sql)
     - [Clase 14](./DML/EjerciciosClase/Clase14.sql)
+    - [Clase 15](./DML/EjerciciosClase/Clase15.sql)
 
-
+---
+Diego Puértolas Ruiz
