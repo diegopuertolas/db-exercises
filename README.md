@@ -11,6 +11,7 @@ Colección de ejercicios de Oracle SQL de la asignatura de BBDD de 1ºDAW.
   - **Ejercicios de Apoyo**
     - [Consultas con Join](./DML/EjerciciosApoyo/consultas-join.sql)
     - [Consultas con Join y Condiciones](./DML/EjerciciosApoyo/consultas-join-condiciones.sql)
+    - [Consultas con Join, Condiciones, IN, OR, LIKE, ORDER BY](./DML/EjerciciosApoyo/consultas-join-condiciones-in-or-like-orderby.sql)
 
   - **Ejercicios de Clase**
     - [Clase 1](./DML/EjerciciosClase/Clase1.sql)
