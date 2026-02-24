@@ -20,7 +20,6 @@ GROUP BY
 -- apellido del empleado que es manager de los países del reino Unido (UK), Estados
 -- Unidos de América (US), respectivamente de los estados de la provincia de
 -- Washington y Oxford.
-
 SELECT 
   R.region_name,
   C.country_name,
@@ -59,3 +58,17 @@ FROM
   ON L.country_id = C.country_id
 WHERE
   C.country_name LIKE 'C%';
+
+-- 14. Desarrolle una consulta que liste en nombre del puesto (job_title), el nombre y
+-- apellidos del empleado que ocupa ese puesto, cuyo email es ‘NKOCHHAR’, el 21 de septiembre de 1989.
+SELECT
+  J.job_title,
+  EMP.first_name,
+  EMP.last_name
+FROM
+  JOBS J
+  INNER JOIN EMPLOYEES EMP
+  ON J.job_id = EMP.job_id
+WHERE
+  EMP.email = 'NKOCHHAR'
+  AND EMP.hire_date = '21/09/1989';;
