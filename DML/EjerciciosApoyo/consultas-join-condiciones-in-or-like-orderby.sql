@@ -41,3 +41,21 @@ FROM
 WHERE
   C.country_name IN ('United Kingdom', 'United States of America')
   AND L.state_province IN ('Washington', 'Oxford');
+
+-- 13. Realice una consulta que muestre el nombre y apellido de los empleados que trabajan
+-- para departamentos que están localizados en países cuyo nombre comienza con la
+-- letra C, que muestre el nombre del país.
+SELECT
+  E.first_name,
+  E.last_name,
+  C.country_name
+FROM
+  EMPLOYEES E
+  INNER JOIN DEPARTMENTS D
+  ON E.department_id = D.department_id
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+  INNER JOIN COUNTRIES C
+  ON L.country_id = C.country_id
+WHERE
+  C.country_name LIKE 'C%';
