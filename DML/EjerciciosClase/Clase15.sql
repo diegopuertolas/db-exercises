@@ -89,8 +89,8 @@ WHERE
 
 -- 6. MOSTRAR EL DEPARTAMENTO QUE TENGA MÁS EMPLEADOS QUE LA MEDIA DE EMPLEADOS POR DEPARTAMENTO
 SELECT
-  D.deparment_name,
-  COUNT(E.employee_id) AS num_employees
+  D.department_name
+  -- Quitamos el COUNT(*) del SELECT ya que no nos piden mostrarlo, pero podemos seguir usándolo en el HAVING.
 FROM
   DEPARTMENTS D
   INNER JOIN EMPLOYEES E
@@ -98,7 +98,7 @@ FROM
 GROUP BY
   D.department_name
 HAVING
-  COUNT(E.employee_id) > (
+  COUNT(*) > (
     SELECT
       AVG(COUNT(*))
     FROM 
