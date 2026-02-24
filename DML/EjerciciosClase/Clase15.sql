@@ -9,7 +9,7 @@ SELECT
 FROM 
   EMPLOYEES EMP
 WHERE
-  EMP.DEPARTMENT_ID = (
+  EMP.DEPARTMENT_ID IN (
     SELECT 
       department_id
     FROM 
@@ -42,7 +42,7 @@ SELECT
 FROM
   EMPLOYEES EMP
 WHERE
-  EMP.DEPARTMENT_ID <> (
+  EMP.DEPARTMENT_ID NOT IN (
     SELECT 
       department_id
     FROM 
