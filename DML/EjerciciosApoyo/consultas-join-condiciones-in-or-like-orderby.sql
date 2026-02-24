@@ -15,3 +15,29 @@ WHERE
 GROUP BY
   D.department_name;
 
+-- 12. Desarrolle una consulta que muestre el nombre de la región, el nombre del país, el
+-- estado de la provincia, el código de los empleados que son manager, el nombre y
+-- apellido del empleado que es manager de los países del reino Unido (UK), Estados
+-- Unidos de América (US), respectivamente de los estados de la provincia de
+-- Washington y Oxford.
+
+SELECT 
+  R.region_name,
+  C.country_name,
+  L.state_province,
+  E.employee_id,
+  E.first_name,
+  E.last_name
+FROM
+  REGIONS R
+  INNER JOIN COUNTRIES C 
+  ON R.region_id = C.region_id
+  INNER JOIN LOCATIONS L 
+  ON C.country_id = L.country_id
+  INNER JOIN DEPARTMENTS D
+  ON L.location_id = D.location_id
+  INNER JOIN EMPLOYEES E 
+  ON D.manager_id = E.employee_id
+WHERE
+  C.country_name IN ('United Kingdom', 'United States of America')
+  AND L.state_province IN ('Washington', 'Oxford');
