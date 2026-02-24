@@ -109,21 +109,44 @@ HAVING
 
 -- 7.MOSTRAR EL DEPARTAMENTO QUE TENGA MÁS PUESTOS DE TRABAJO (JOBS) QUE EL DEPARTAMENTO IT
 SELECT 
-  D.department_name, 
-  COUNT(EMP.employee_id) AS num_employees
+  D.department_name
+FROM
+  DEPARTMENTS D
+  INNER JOIN EMPLOYEES EMP
+  ON D.department_id = EMP.department_id
+GROUP BY
+  D.department_name
+HAVING
+  COUNT(*) > (
+    SELECT
+      COUNT(*)
+    FROM
+      EMPLOYEES EMP
+      INNER JOIN DEPARTMENTS D
+      ON EMP.department_id = D.department_id
+    WHERE
+      D.department_name = 'IT'
+  ); 
+
+-- Contando por puestos de trabajo (jobs) en lugar de empleados, ya que un departamento puede tener varios empleados con el mismo puesto.
+SELECT
+  D.department_name
 FROM 
   DEPARTMENTS D
   INNER JOIN EMPLOYEES EMP
   ON D.department_id = EMP.department_id
-GROUP BY 
+GROUP BY
   D.department_name
-HAVING 
-  COUNT(EMP.employee_id) > (
-    SELECT 
-      COUNT(EMP2.employee_id)
+HAVING
+  COUNT(*) > (
+    SELECT
+      COUNT(*)
     FROM 
-      EMPLOYEES EMP2
-    INNER JOIN DEPARTMENTS D2 
-    ON EMP2.department_id = D2.department_id
-    WHERE D2.department_name = 'IT'
-);
+      EMPLOYEES EMP
+      INNER JOIN DEPARTMENTS D
+      ON EMP.department_id = D.department_id
+    WHERE
+      D.department_name = 'IT'
+  );
+  
+  
