@@ -13,9 +13,9 @@ FROM
 WHERE
   EMP.salary = (
     SELECT
-      MAX(salary)
+      MAX(EMP2.salary)
     FROM
-      EMPLOYEES
+      EMPLOYEES EMP2
   );
 
 -- 35. Desarrolle una consulta que muestre código de departamento, el nombre y apellido de
@@ -53,11 +53,11 @@ FROM
 WHERE
   EMP.salary = (
     SELECT
-      MAX(salary)
+      MAX(EMP2.salary)
     FROM
-      EMPLOYEES
+      EMPLOYEES EMP2
     WHERE
-      department_id = EMP.department_id
+      EMP2.department_id = EMP.department_id
   );
 
 -- 37. Elabore una consulta que muestre el código del departamento, el nombre de
@@ -67,11 +67,11 @@ SELECT
   D.department_name,
   (
     SELECT
-      MAX(salary)
+      MAX(EMP2.salary)
     FROM 
-      EMPLOYEES EMP
+      EMPLOYEES EMP2
     WHERE
-      EMP.department_id = D.department_id
+      EMP2.department_id = D.department_id
   )
 FROM 
   DEPARTMENTS D;
@@ -285,4 +285,3 @@ WHERE
   D.department_name <> 'Finance'
 ORDER BY
   EMP.employee_id ASC;
-  

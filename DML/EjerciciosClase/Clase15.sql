@@ -82,7 +82,7 @@ WHERE
     FROM
       EMPLOYEES EMP
       INNER JOIN DEPARTMENTS D
-      ON EMP.employee_id = D.manager_id
+      ON EMP.employee_id = D.manager_id -- También podríamos usar el department_id para unir, pero así es más directo.
     WHERE
       D.department_name = ('Sales')
   );

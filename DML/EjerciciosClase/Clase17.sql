@@ -1,4 +1,4 @@
--- Clase 15
+-- Clase 17
 -- Diego Puértolas Ruiz, 1SW
 
 -- 7-MUESTRA EL MANAGER QUE TIENE MÁS TRABAJADORES A SU CARGO.
@@ -126,7 +126,8 @@ WHERE
       ON C.region_id = R.region_id
     WHERE
       R.region_name = 'America'
-  ); 
+  ); -- Así el EMP.salary tiene que ser menor que la media de Europa y mayor que la media de América, es decir, entre ambas medias.
+     -- Si hubiéramos puesto el EMP.salary > la media de América y luego el EMP.salary < la media de Europa, también sería correcto, ya que el orden de las condiciones no afecta al resultado final.
 
 -- 10-MUESTRA A TODOS LOS EMPLEADOS QUE NO ESTÉN TRABAJANDO EN EL DEPARTAMENTO 30 Y QUE GANEN
 -- MÁS QUE TODOS LOS EMPLEADOS QUE TRABAJAN EN EL DEPARTAMENTO 30.

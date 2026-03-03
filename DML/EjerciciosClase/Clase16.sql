@@ -1,4 +1,4 @@
--- Clase 15
+-- Clase 16
 -- Diego Puértolas Ruiz, 1SW
 
 -- 1-MUESTRA EL NOMBRE Y APELLIDOS DE LOS EMPLEADOS DE LOS DEPARTAMENTOS, 
@@ -17,9 +17,9 @@ HAVING
   -- y compararlo con la media de salarios del departamento del empleado actual.
   AVG(EMP.salary) > (
     SELECT
-      MIN(AVG(salary))
+      MIN(AVG(EMP2.salary))
     FROM
-      EMPLOYEES
+      EMPLOYEES EMP2
     GROUP BY
       DEPARTMENT_ID
   ); 
