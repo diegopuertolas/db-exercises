@@ -94,3 +94,20 @@ WHERE
     WHERE
       EMP2.department_id = D.department_id
   );
+
+-- 38. Encuentra todos los registros en la tabla empleados que contengan un valor que
+-- ocurre dos veces en una columna dada.
+SELECT
+  *
+FROM 
+  EMPLOYEES EMP
+WHERE
+  2 = (
+    SELECT
+      COUNT(*)
+    FROM 
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.salary = EMP.salary -- Aquí se puede cambiar por cualquier otra columna, como el nombre, el apellido, etc.
+  );
+
