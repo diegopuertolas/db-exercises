@@ -165,3 +165,19 @@ WHERE
     WHERE
       EMP2.department_id = 30 
   );
+
+-- 41. Elabore una consulta que muestre los departamentos en donde no exista ningún empleado.
+SELECT
+  D.department_id,
+  D.department_name
+FROM
+  DEPARTMENTS D
+WHERE
+  NOT EXISTS (
+    SELECT
+      *
+    FROM
+      EMPLOYEES EMP
+    WHERE
+      EMP.department_id = D.department_id
+  )
