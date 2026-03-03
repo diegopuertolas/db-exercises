@@ -202,3 +202,42 @@ WHERE
     WHERE
       EMP2.department_id = 30
   );
+
+-- 43. Realice una consulta que muestre los empleados que son gerentes (manager_id) y el
+-- número de empleados subordinados a cada uno, ordenados descendentemente por
+-- número de subordinado. Excluya a los gerentes que tienen 5 empleados subordinados
+-- o menos.
+SELECT
+  EMP.first_name,
+  EMP.last_name,
+  -- Subconsulta para contar el número de empleados subordinados a cada gerente
+  ( 
+    SELECT
+      COUNT(*)
+    FROM 
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.manager_id = EMP.manager_id
+  ) AS num_subordinados
+FROM
+  EMPLOYEES EMP
+WHERE
+  EMP.manager_id IS NOT NULL -- Para asegurarnos de que solo seleccionamos a los gerentes
+  AND
+  (
+    SELECT
+      COUNT(*)
+    FROM 
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.manager_id = EMP.manager_id
+  ) > 5 -- Excluimos a los gerentes con 5 o menos subordinados
+ORDER BY
+  (
+    SELECT
+      COUNT(*)
+    FROM 
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.manager_id = EMP.manager_id
+  ) DESC; -- Ordenamos descendentemente por número de subordinados
