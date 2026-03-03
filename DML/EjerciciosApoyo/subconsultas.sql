@@ -17,3 +17,26 @@ WHERE
     FROM
       EMPLOYEES
   );
+
+-- 35. Desarrolle una consulta que muestre código de departamento, el nombre y apellido de
+-- los empleados de únicamente de los departamentos en donde existen empleados con
+-- nombre ‘Jonh’.
+SELECT
+  D.department_id,
+  EMP.first_name,
+  EMP.last_name
+FROM 
+  EMPLOYEES EMP
+  INNER JOIN DEPARTMENTS D
+  ON EMP.department_id = D.department_id
+WHERE
+  D.department_id IN (
+    SELECT
+      D.department_id
+    FROM 
+      DEPARTMENTS D
+      INNER JOIN EMPLOYEES EMP
+      ON D.department_id = EMP.department_id
+    WHERE
+      EMP.first_name = 'John'
+  );
