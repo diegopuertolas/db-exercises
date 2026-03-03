@@ -40,3 +40,22 @@ WHERE
     WHERE
       EMP.first_name = 'John'
   );
+
+-- 36. Desarrolle una consulta que liste el código de departamento, nombre, apellido y salario
+-- de únicamente los empleados con máximo salario en cada departamento.
+SELECT
+  EMP.department_id,
+  EMP.first_name,
+  EMP.last_name,
+  EMP.salary
+FROM
+  EMPLOYEES EMP
+WHERE
+  EMP.salary = (
+    SELECT
+      MAX(salary)
+    FROM
+      EMPLOYEES
+    WHERE
+      department_id = EMP.department_id
+  );
