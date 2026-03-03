@@ -111,3 +111,37 @@ WHERE
       EMP2.salary = EMP.salary -- Aquí se puede cambiar por cualquier otra columna, como el nombre, el apellido, etc.
   );
 
+-- 39. Realice una consulta que liste los empleados que están en departamentos que tienen
+-- menos de 10 empleados.
+SELECT
+  EMP.first_name,
+  EMP.last_name
+FROM 
+  EMPLOYEES EMP
+WHERE
+  (
+    SELECT
+      COUNT(*)
+    FROM
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.department_id = EMP.department_id
+  ) < 10;
+
+-- Otra forma de hacerlo, sería seleccionar directamente los departamentos con menos de 10 empleados.
+SELECT
+  EMP.first_name,
+  EMP.last_name
+FROM 
+  EMPLOYEES EMP
+WHERE
+  EMP.department_id IN (
+    SELECT
+      department_id
+    FROM
+      EMPLOYEES EMP2
+    GROUP BY
+      department_id
+    HAVING
+      COUNT(*) < 10
+  ); -- Devolverá 27 ya que no cuenta las personas que tienen el department_id nulo.
