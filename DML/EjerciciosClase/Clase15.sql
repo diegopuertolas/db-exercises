@@ -148,5 +148,3 @@ HAVING
     WHERE
       D.department_name = 'IT'
   );
-  
-  
