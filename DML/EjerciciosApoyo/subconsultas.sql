@@ -181,3 +181,24 @@ WHERE
     WHERE
       EMP.department_id = D.department_id
   )
+
+-- 42. Desarrolle una consulta que muestre a todos los empleados que no estén trabajando
+-- en el departamento 30 y que ganen más que todos los empleados que trabajan en el
+-- departamento 30.
+SELECT
+  EMP.first_name,
+  EMP.last_name,
+  EMP.salary
+FROM
+  EMPLOYEES EMP
+WHERE
+  EMP.department_id <> 30
+  AND
+  EMP.salary > (
+    SELECT
+      MAX(EMP2.salary) 
+    FROM
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.department_id = 30
+  );
