@@ -241,3 +241,47 @@ ORDER BY
     WHERE
       EMP2.manager_id = EMP.manager_id
   ) DESC; -- Ordenamos descendentemente por número de subordinados
+
+-- 44. Desarrolle una consulta donde muestre el código de empleado , el apellido, salario,
+-- nombre de región, nombre de país, estado de la provincia , código de departamento,
+-- nombre de departamento donde cumpla las siguientes condiciones :
+-- • Que los empleados que seleccione su salario sea mayor al promedio de su
+-- departamento.
+-- • Que no seleccione los del estado de la provincia de Texas
+-- • Que ordene la información por código de empleado ascendentemente.
+-- • Que no escoja los del departamento de finanzas (Finance)
+SELECT
+  EMP.employee_id,
+  EMP.first_name,
+  EMP.last_name,
+  EMP.salary,
+  R.region_name,
+  C.country_name,
+  L.state_province,
+  D.department_id,
+  D.department_name
+FROM
+  EMPLOYEES EMP
+  INNER JOIN DEPARTMENTS D
+  ON EMP.department_id = D.department_id
+  INNER JOIN LOCATIONS L
+  ON D.location_id = L.location_id
+  INNER JOIN COUNTRIES C
+  ON L.country_id = C.country_id
+  INNER JOIN REGIONS R
+  ON C.region_id = R.region_id
+WHERE
+  EMP.salary > (
+    SELECT
+      AVG(EMP2.salary)
+    FROM
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.department_id = EMP.department_id
+  )
+  AND
+  L.state_province <> 'Texas'
+  AND
+  D.department_name <> 'Finance'
+ORDER BY
+  EMP.employee_id ASC;
