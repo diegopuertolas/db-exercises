@@ -59,3 +59,38 @@ WHERE
     WHERE
       department_id = EMP.department_id
   );
+
+-- 37. Elabore una consulta que muestre el código del departamento, el nombre de
+-- departamento y el salario máximo de cada departamento.
+SELECT
+  D.department_id,
+  D.department_name,
+  (
+    SELECT
+      MAX(salary)
+    FROM 
+      EMPLOYEES EMP
+    WHERE
+      EMP.department_id = D.department_id
+  )
+FROM 
+  DEPARTMENTS D;
+
+-- Para que no muestre los departamentos sin empleados:
+SELECT
+  D.department_id,
+  D.department_name,
+  EMP.salary
+FROM
+  DEPARTMENTS D
+  INNER JOIN EMPLOYEES EMP
+  ON D.department_id = EMP.department_id
+WHERE
+  EMP.salary = (
+    SELECT
+      MAX(EMP2.salary)
+    FROM 
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.department_id = D.department_id
+  );
