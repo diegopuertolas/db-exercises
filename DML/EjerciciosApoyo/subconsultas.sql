@@ -145,3 +145,23 @@ WHERE
     HAVING
       COUNT(*) < 10
   ); -- Devolverá 27 ya que no cuenta las personas que tienen el department_id nulo.
+
+-- 40. Desarrolle una consulta que muestre el mayor salario entre los empleados que
+-- trabajan en el departamento 30 (department_id) y que empleados ganan ese salario.
+SELECT
+  EMP.first_name,
+  EMP.last_name,
+  EMP.salary
+FROM
+  EMPLOYEES EMP
+WHERE
+  EMP.department_id = 30
+  AND
+  EMP.salary = (
+    SELECT
+      MAX(salary)
+    FROM
+      EMPLOYEES EMP2
+    WHERE
+      EMP2.department_id = 30 
+  );
