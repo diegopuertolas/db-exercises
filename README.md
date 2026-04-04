@@ -51,6 +51,7 @@ Colección de ejercicios de Oracle SQL de la asignatura de BBDD de 1ºDAW.
   - [Clase 3](./PLSQL/Clase3.sql)
   - [Clase 4](./PLSQL/Clase4.sql)
   - [Clase 5](./PLSQL/Clase5.sql)
+  - [Clase 6](./PLSQL/Clase6.sql)
 
 
 ---
