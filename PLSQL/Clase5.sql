@@ -1,0 +1,96 @@
+-- Clase 5 PLSQL
+-- Diego Puértolas Ruiz 1SW
+
+-- 1. USANDO UN BUCLE LOOP, MOSTRAR LOS VALORES DEL 1 AL 10
+SET SERVEROUTPUT ON;
+DECLARE
+  i NUMBER := 1;
+BEGIN
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(i);
+    i := i + 1;
+    EXIT WHEN i > 10;
+  END LOOP;
+END;
+
+-- 2. REALIZA UN BLOQUE QUE MEDIANTE UNA VARIABLE QUE CONTENGA UNA CADENA DE TEXTO, 
+-- POR EJEMPLO 'SGFKIGKIGALKHHJH' NOS DE LA POSICION DE LA LETRA A
+SET SERVEROUTPUT ON;
+DECLARE
+  cadena VARCHAR2(20) := 'SGFKIGKIGALKHHJH';
+  posicion NUMBER := 1;
+BEGIN
+  LOOP
+    IF SUBSTR(cadena, posicion, 1) = 'A' THEN
+      DBMS_OUTPUT.PUT_LINE('La letra A se encuentra en la posición: ' || posicion);
+      EXIT;
+    END IF;
+    posicion := posicion + 1;
+    IF posicion > LENGTH(cadena) THEN
+      DBMS_OUTPUT.PUT_LINE('La letra A no se encuentra en la cadena.');
+      EXIT;
+    END IF;
+  END LOOP;
+END;
+
+-- 3. VAMOS A CREAR UN BLOQUE QUE CREE UNA TABLA LLAMADA PRUEBA_P CON DOS CAMPOS.
+-- UN CAMPO ID NUMERICO: 'ID_PRUEBA' Y UN CAMPO 'NUMERO' TAMBIEN NUMÉRICO
+SET SERVEROUTPUT ON;
+DECLARE
+ var_sql VARCHAR2(200);
+BEGIN
+  var_sql := 'CREATE TABLE PRUEBA_P (ID_PRUEBA NUMBER, NUMERO NUMBER)';
+  DBMS_OUTPUT.PUT_LINE('Ejecutando: ' || var_sql);
+  EXECUTE IMMEDIATE var_sql;
+  DBMS_OUTPUT.PUT_LINE('Tabla PRUEBA_P creada exitosamente.');
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error al crear la tabla: ' || SQLERRM);
+END;
+
+-- 4. CREA UN BLOQUE QUE RECUPERE LA INFORMACIÓN DE UNA CONSULTA ('SELECT MAX(SALARY) FROM EMPLOYEES') 
+-- LA GUARDE EN UNA VARIABLE Y LA MUESTRE POR PANTALLA
+SET SERVEROUTPUT ON;
+DECLARE
+  var_sql VARCHAR2(200);
+  max_salary NUMBER;
+BEGIN
+  var_sql := 'SELECT MAX(SALARY) FROM EMPLOYEES';
+  EXECUTE IMMEDIATE var_sql INTO max_salary;
+  DBMS_OUTPUT.PUT_LINE('El salario máximo es: ' || max_salary);
+EXCEPTION
+  WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('Error al ejecutar la consulta: ' || SQLERRM);
+END;  
+
+-- 5. CREAR UN PROCEDIMIENTO QUE CALCULE EL SALARIO MAX DE UN DEPARTAMENTO, QUE PASAMOS COMO PARÁMETRO
+CREATE OR REPLACE PROCEDURE SALARIO_MAX_DPTO(p_department_id IN EMPLOYEES.department_id%TYPE) AS
+    max_salary EMPLOYEES.salary%TYPE;
+BEGIN
+    SELECT MAX(SALARY) INTO max_salary 
+    FROM EMPLOYEES 
+    WHERE department_id = p_department_id;
+
+    IF max_salary IS NULL THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontraron empleados en el departamento ' || p_department_id);
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('El salario máximo en el departamento ' || p_department_id || ' es: ' || max_salary);
+    END IF;
+END;
+  
+EXECUTE SALARIO_MAX_DPTO(100);
+
+
+-- 6. CREAR UN PROCEDIMIENTO ALMACENADO QUE INSERTE UN REGISTRO EN LA TABLA PRUEBA_P CREADA ANTERIORMENTE
+CREATE OR REPLACE PROCEDURE INSERTAR_REGISTRO_PRUEBA_P(p_id_prueba IN PRUEBA_P.ID_PRUEBA%TYPE, p_numero IN PRUEBA_P.NUMERO%TYPE) 
+AS
+BEGIN
+    INSERT INTO PRUEBA_P (ID_PRUEBA, NUMERO) VALUES (p_id_prueba, p_numero);
+    DBMS_OUTPUT.PUT_LINE('Registro insertado: ID_PRUEBA = ' || p_id_prueba || ', NUMERO = ' || p_numero);
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error al insertar el registro: ' || SQLERRM);
+END; 
+
+EXECUTE INSERTAR_REGISTRO_PRUEBA_P(1, 100);
+
