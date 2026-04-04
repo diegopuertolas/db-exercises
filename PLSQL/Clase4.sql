@@ -43,6 +43,19 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('La letra del DNI ' || dni || ' es: ' || letra);
 END;
 
+-- Usando ARRAYS
+SET SERVEROUTPUT ON;
+DECLARE
+    dni VARCHAR2(8):='73441850';
+    posicion_array NUMBER;
+    arr_letras VARCHAR(23):= 'TRWAGMYFPDXBNJZSQVHLCKE';
+    letra VARCHAR(1) := SUBSTR(arr_letras, posicion_array, 1);
+BEGIN
+    posicion_array := MOD (dni, 23) + 1;
+    letra := SUBSTR(arr_letras, posicion_array, 1);
+    DBMS_OUTPUT.PUT_LINE(dni || letra);
+END;
+
 -- 2- EJEMPLO QUE MUESTRE UN NUMERO MIENTRAS SEA MENOR QUE DIEZ
 SET SERVEROUTPUT ON;
 DECLARE
