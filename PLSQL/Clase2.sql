@@ -104,9 +104,9 @@ END;
 -- Si no es europeo, muestra un mensaje de advertencia.
 SET SERVEROUTPUT ON;
 DECLARE
-  emp_name EMPLOYEES.FIRST_NAME%TYPE;
-  emp_surname EMPLOYEES.LAST_NAME%TYPE;
-  emp_region REGIONS.REGION_NAME%TYPE;
+  emp_name EMPLOYEES.first_name%TYPE;
+  emp_surname EMPLOYEES.last_name%TYPE;
+  emp_region REGIONS.region_name%TYPE;
 BEGIN
   SELECT 
     first_name, 
