@@ -11,7 +11,7 @@ DECLARE
 BEGIN
   IF num1 > num2 THEN
     DBMS_OUTPUT.PUT_LINE('El número mayor es: ' || num1);
-  ELSE num2 > num1 THEN
+  ELSIF num2 > num1 THEN
     DBMS_OUTPUT.PUT_LINE('El número mayor es: ' || num2);
   END IF;
 END;
