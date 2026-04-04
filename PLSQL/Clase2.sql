@@ -1,4 +1,4 @@
--- Clase 1 PLSQL
+-- Clase 2 PLSQL
 -- Diego Puértolas Ruiz 1SW
 
 -- EJERCICIO 1: EL MAYOR DE DOS NÚMEROS
